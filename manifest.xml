@@ -7,7 +7,7 @@
   <DisplayName DefaultValue="ABDK Confy AI"/>
   <Description DefaultValue="Analyze and modify your spreadsheet using AI securely, without revealing sensitive information to the AI provider"/>
   <IconUrl DefaultValue="https://confyai.abdk.consulting/icons/icon32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://confyai.abdk.consulting/icons/icon128.png"/>
+  <HighResolutionIconUrl DefaultValue="https://confyai.abdk.consulting/icons/icon64.png"/>
   <SupportUrl DefaultValue="https://github.com/abdk-consulting/confy-ai-public"/>
   <AppDomains>
     <AppDomain>https://abdk.consulting</AppDomain>
@@ -35,6 +35,7 @@
                 <Icon>
                   <bt:Image size="16" resid="Icon.16x16"/>
                   <bt:Image size="32" resid="Icon.32x32"/>
+                  <bt:Image size="64" resid="Icon.64x64"/>
                   <bt:Image size="80" resid="Icon.80x80"/>
                 </Icon>
                 <Control xsi:type="Button" id="TaskpaneButton">
@@ -46,6 +47,7 @@
                   <Icon>
                     <bt:Image size="16" resid="Icon.16x16"/>
                     <bt:Image size="32" resid="Icon.32x32"/>
+                    <bt:Image size="64" resid="Icon.64x64"/>
                     <bt:Image size="80" resid="Icon.80x80"/>
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
@@ -63,6 +65,7 @@
       <bt:Images>
         <bt:Image id="Icon.16x16" DefaultValue="https://confyai.abdk.consulting/icons/icon16.png"/>
         <bt:Image id="Icon.32x32" DefaultValue="https://confyai.abdk.consulting/icons/icon32.png"/>
+        <bt:Image id="Icon.64x64" DefaultValue="https://confyai.abdk.consulting/icons/icon64.png"/>
         <bt:Image id="Icon.80x80" DefaultValue="https://confyai.abdk.consulting/icons/icon80.png"/>
       </bt:Images>
       <bt:Urls>
