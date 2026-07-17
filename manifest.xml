@@ -8,7 +8,7 @@
   <Description DefaultValue="Analyze and modify your spreadsheet using AI securely, without revealing sensitive information to the AI provider"/>
   <IconUrl DefaultValue="https://confyai.abdk.consulting/icons/icon32.png"/>
   <HighResolutionIconUrl DefaultValue="https://confyai.abdk.consulting/icons/icon128.png"/>
-  <SupportUrl DefaultValue="https://abdk.consulting"/>
+  <SupportUrl DefaultValue="https://github.com/abdk-consulting/confy-ai-public"/>
   <AppDomains>
     <AppDomain>https://abdk.consulting</AppDomain>
   </AppDomains>
@@ -66,7 +66,7 @@
         <bt:Image id="Icon.80x80" DefaultValue="https://confyai.abdk.consulting/icons/icon80.png"/>
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
+        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://github.com/abdk-consulting/confy-ai-public"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://confyai.abdk.consulting/index.html?is_excel_plugin=true"/>
       </bt:Urls>
       <bt:ShortStrings>

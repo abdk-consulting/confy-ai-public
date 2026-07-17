@@ -23,7 +23,32 @@ Columns you mark as private are visually highlighted inside Excel so you always 
 ### Your own API key — your data, your account
 The add-in uses your personal OpenAI API key, which you enter once and is stored only on your device. ABDK Consulting never sees your key, your data, or your AI usage. Calls go directly from your browser to OpenAI; no data passes through ABDK servers.
 
-> **Note:** Using this add-in requires an [OpenAI account](https://platform.openai.com/) and an active API key. OpenAI charges apply based on your usage according to their pricing.
+> **Note:** Using this add-in requires an [OpenAI account](https://platform.openai.com/) and an active API key. See the cost section below for estimates.
+
+---
+
+## API Cost Estimates
+
+The add-in uses your own OpenAI API key. All charges go directly to your OpenAI account — ABDK Consulting receives nothing. The estimates below are based on **gpt-5.5** pricing ($5 / $0.50 cached / $30 per 1M tokens) measured across a 20-sheet, 830-row test workbook (74 test cases, 135 model turns).
+
+### How the add-in differs from pasting your data directly
+
+The add-in never sends your actual row values to the model. Instead it sends only column headers and inferred schema metadata, generates **synthetic data** locally, runs the analysis on the fake data, then re-executes the resulting code on your real data entirely inside your browser. This keeps sensitive values off OpenAI's servers and also makes cost **flat in row count** — unlike a naive paste-the-sheet approach whose token bill grows one-for-one with your data.
+
+### Cost per conversation turn
+
+| Rows per sheet | Raw data (no add-in) | With add-in | Cheaper option |
+|---|---|---|---|
+| 40 *(typical small sheet)* | $0.051 | $0.083 | Raw −39% |
+| 100 | $0.057 | $0.083 | Raw −31% |
+| **≈ 350** | $0.084 | $0.083 | **Break-even** |
+| 1,000 | $0.153 | $0.083 | Add-in −46% |
+| 5,000 | $0.580 | $0.083 | Add-in −86% |
+| 20,000 | $2.18 | $0.083 | Add-in −96% |
+
+The add-in's cost of **≈ $0.083 per turn is essentially flat** regardless of how many rows your sheet has. Sending raw data is cheaper only for very small sheets (under ~350 rows); beyond that break-even point the add-in becomes the less expensive option, and eventually the only feasible one — a single 54k-row sheet would exceed gpt-5.5's context window if sent as raw text.
+
+For a typical interactive session of 5–10 turns, expect **$0.40–$0.85** in API charges.
 
 ---
 
@@ -52,6 +77,14 @@ The add-in uses your personal OpenAI API key, which you enter once and is stored
 See [PRIVACY.md](PRIVACY.md) for the full privacy policy.
 
 In summary: ABDK Consulting collects no personal data whatsoever. Your spreadsheet data is sent only to OpenAI's API (the columns you chose to protect are never sent anywhere). Your API key is stored locally on your device only.
+
+---
+
+## Terms of Use
+
+See [TERMS.md](TERMS.md) for the full terms of use.
+
+The Add-in is provided **"as is" without warranty of any kind**. You are responsible for reviewing AI-proposed edits before applying them and for correctly marking sensitive columns as private. All OpenAI API charges are your own responsibility.
 
 ---
 
