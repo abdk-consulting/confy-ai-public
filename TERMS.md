@@ -1,6 +1,6 @@
 # Terms of Use — ABDK Confy AI
 
-**Effective date:** 2026-07-17
+**Effective date:** 2026-08-03
 **Publisher:** ABDK Consulting, Estonia
 **Contact:** [dmitry@abdkconsulting.com](mailto:dmitry@abdkconsulting.com)
 
@@ -20,15 +20,17 @@ The Add-in is a Microsoft Excel task-pane add-in that enables natural-language i
 - Request edits, transformations, or synthetic data generation.
 - Designate specific columns as private so their values are excluded from all AI requests.
 
-The Add-in sends the non-private portions of your spreadsheet and your chat messages to OpenAI's API using an API key you supply. It reads and writes data in your open Excel workbook in response to AI-generated instructions that you review and accept.
+The Add-in sends the non-private portions of your spreadsheet and your chat messages to the API of an AI provider you select, using an API key you supply. It reads and writes data in your open Excel workbook in response to AI-generated instructions that you review and accept.
 
 ---
 
 ## 3. Third-Party Services
 
-### 3.1 OpenAI
+### 3.1 AI Providers
 
-The Add-in relies on OpenAI's API. You must have a valid OpenAI account and API key, and your use of OpenAI's services is governed solely by [OpenAI's Terms of Use](https://openai.com/terms) and [Privacy Policy](https://openai.com/privacy). ABDK Consulting has no control over OpenAI's services, availability, pricing, or data handling.
+The Add-in relies on a third-party AI provider that you select. Supported providers are OpenAI, Anthropic, Google Gemini, OpenRouter, and any OpenAI-compatible endpoint whose address you supply yourself. You must have a valid account and API key with the provider you choose, and your use of that provider's services is governed solely by its own terms and privacy policy — for example [OpenAI](https://openai.com/policies/terms-of-use), [Anthropic](https://www.anthropic.com/legal/commercial-terms), [Google](https://ai.google.dev/gemini-api/terms), or [OpenRouter](https://openrouter.ai/terms). ABDK Consulting has no control over any provider's services, availability, pricing, or data handling, and does not endorse or warrant any of them.
+
+Where you point the Add-in at an OpenAI-compatible endpoint of your own choosing, you are solely responsible for that endpoint and for any handling of data it receives.
 
 ### 3.2 Microsoft Excel and Office
 
@@ -40,7 +42,7 @@ The Add-in runs inside Microsoft Excel. Your use of Excel and related Microsoft 
 
 You are responsible for:
 
-- Obtaining and maintaining a valid OpenAI API key at your own cost. All API charges billed by OpenAI are your sole responsibility.
+- Obtaining and maintaining a valid API key with your chosen AI provider at your own cost. All API charges billed by that provider are your sole responsibility.
 - Ensuring you have the right to process the spreadsheet data you use with the Add-in, including any data belonging to third parties.
 - Reviewing AI-proposed changes before applying them to your workbook. The Add-in presents changes for your approval; you are responsible for any edits you accept.
 - Correctly identifying which columns contain sensitive data and marking them as private before initiating an AI chat session. ABDK Consulting cannot verify or guarantee that your private column selection is complete or correct.
@@ -55,7 +57,7 @@ You must not use the Add-in to:
 - Process data in violation of applicable law, including data protection and privacy regulations.
 - Transmit or process data that you do not have the right to use.
 - Attempt to reverse-engineer, decompile, or extract the source code of the Add-in beyond what is made available in the public repository at [https://github.com/abdk-consulting/confy-ai-public](https://github.com/abdk-consulting/confy-ai-public).
-- Use the Add-in in a manner that violates OpenAI's usage policies or Microsoft's platform policies.
+- Use the Add-in in a manner that violates your AI provider's usage policies or Microsoft's platform policies.
 
 ---
 
@@ -82,7 +84,7 @@ To the fullest extent permitted by applicable law, ABDK Consulting and its offic
 - Financial loss arising from incorrect AI-generated analysis or data.
 - Unintended disclosure of sensitive data resulting from incorrect private column configuration by the user.
 - Indirect, incidental, special, consequential, or punitive damages, however caused and regardless of the theory of liability.
-- Damages arising from the unavailability or modification of OpenAI's API or Microsoft's platform.
+- Damages arising from the unavailability or modification of any AI provider's API or Microsoft's platform.
 
 In jurisdictions that do not allow the exclusion of certain warranties or the limitation of certain damages, the above exclusions and limitations apply to the maximum extent permitted by law.
 

@@ -21,19 +21,31 @@ Instruct the AI to add rows, fill in missing values, generate synthetic data, or
 Columns you mark as private are visually highlighted inside Excel so you always know what is protected. Your selection is saved with the document and restored automatically the next time you open it.
 
 ### Your own API key — your data, your account
-The add-in uses your personal OpenAI API key, which you enter once and is stored only on your device. ABDK Consulting never sees your key, your data, or your AI usage. Calls go directly from your browser to OpenAI; no data passes through ABDK servers.
+The add-in runs on your own AI provider account. You pick a provider and model, enter that provider's API key once, and the key is stored only on your device. ABDK Consulting never sees your key, your data, or your AI usage. Calls go directly from your browser to the provider you chose; no data passes through ABDK servers.
 
-> **Note:** Using this add-in requires an [OpenAI account](https://platform.openai.com/) and an active API key. See the cost section below for estimates.
+### Choice of AI provider
+
+| Provider | Where to get an API key |
+|---|---|
+| OpenAI | [platform.openai.com/api-keys](https://platform.openai.com/api-keys) |
+| Anthropic (Claude) | [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys) |
+| Google Gemini | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) |
+| OpenRouter | [openrouter.ai/keys](https://openrouter.ai/keys) |
+| Any OpenAI-compatible endpoint | Supply your own base URL and model — Groq, Mistral, xAI, DeepSeek, vLLM, Ollama, and similar |
+
+Each provider offers a list of suggested models, and you can always type in a model name the list doesn't carry yet. Switch provider, key or model at any time from the settings menu inside the add-in.
+
+> **Note:** Using this add-in requires an account with one of the providers above and an active API key. See the cost section below for estimates.
 
 ---
 
 ## API Cost Estimates
 
-The add-in uses your own OpenAI API key. All charges go directly to your OpenAI account — ABDK Consulting receives nothing. The estimates below are based on **gpt-5.5** pricing ($5 / $0.50 cached / $30 per 1M tokens) measured across a 20-sheet, 830-row test workbook (74 test cases, 135 model turns).
+All charges go directly to your account with whichever provider you chose — ABDK Consulting receives nothing. The estimates below were measured on **OpenAI gpt-5.5** ($5 / $0.50 cached / $30 per 1M tokens) across a 20-sheet, 830-row test workbook (74 test cases, 135 model turns). Absolute figures move with the provider and model you pick; the shape of the curve — flat in row count — does not, because it follows from how the add-in works rather than from who serves the model.
 
 ### How the add-in differs from pasting your data directly
 
-The add-in never sends your actual row values to the model. Instead it sends only column headers and inferred schema metadata, generates **synthetic data** locally, runs the analysis on the fake data, then re-executes the resulting code on your real data entirely inside your browser. This keeps sensitive values off OpenAI's servers and also makes cost **flat in row count** — unlike a naive paste-the-sheet approach whose token bill grows one-for-one with your data.
+The add-in never sends your actual row values to the model. Instead it sends only column headers and inferred schema metadata, generates **synthetic data** locally, runs the analysis on the fake data, then re-executes the resulting code on your real data entirely inside your browser. This keeps sensitive values off the provider's servers and also makes cost **flat in row count** — unlike a naive paste-the-sheet approach whose token bill grows one-for-one with your data.
 
 ### Cost per conversation turn
 
@@ -64,11 +76,12 @@ For a typical interactive session of 5–10 turns, expect **$0.40–$0.85** in A
 
 ## How It Works (User Perspective)
 
-1. **First launch** — A welcome screen prompts you to select which columns hold sensitive data.
-2. **Column picker** — A dialog lists all columns in your workbook. Tick the ones you want to keep private.
-3. **Chat** — Type your question or instruction. The AI receives only the non-private data and responds in the chat panel.
-4. **Apply changes** — If the AI proposes edits to the spreadsheet, a confirmation step lets you review and accept them before anything is written.
-5. **Change protected columns at any time** — Use the settings menu inside the add-in to update your private column selection.
+1. **First launch** — A setup screen asks you to choose an AI provider, enter its API key, and pick a model. Each provider links to the page where a new user can get a key.
+2. **Welcome screen** — Prompts you to select which columns hold sensitive data.
+3. **Column picker** — A dialog lists all columns in your workbook. Tick the ones you want to keep private.
+4. **Chat** — Type your question or instruction. The AI receives only the non-private data and responds in the chat panel.
+5. **Apply changes** — If the AI proposes edits to the spreadsheet, a confirmation step lets you review and accept them before anything is written.
+6. **Change anything at any time** — The settings menu updates your private column selection, switches provider, key or model, and signs you out by removing the stored key.
 
 ---
 
@@ -76,7 +89,7 @@ For a typical interactive session of 5–10 turns, expect **$0.40–$0.85** in A
 
 See [PRIVACY.md](PRIVACY.md) for the full privacy policy.
 
-In summary: ABDK Consulting collects no personal data whatsoever. Your spreadsheet data is sent only to OpenAI's API (the columns you chose to protect are never sent anywhere). Your API key is stored locally on your device only.
+In summary: ABDK Consulting collects no personal data whatsoever. Your spreadsheet data is sent only to the AI provider you chose (the columns you chose to protect are never sent anywhere). Your API key is stored locally on your device only.
 
 ---
 
@@ -84,7 +97,7 @@ In summary: ABDK Consulting collects no personal data whatsoever. Your spreadshe
 
 See [TERMS.md](TERMS.md) for the full terms of use.
 
-The Add-in is provided **"as is" without warranty of any kind**. You are responsible for reviewing AI-proposed edits before applying them and for correctly marking sensitive columns as private. All OpenAI API charges are your own responsibility.
+The Add-in is provided **"as is" without warranty of any kind**. You are responsible for reviewing AI-proposed edits before applying them and for correctly marking sensitive columns as private. All AI provider charges are your own responsibility.
 
 ---
 
