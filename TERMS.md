@@ -22,6 +22,8 @@ The Add-in is a Microsoft Excel task-pane add-in that enables natural-language i
 
 The Add-in sends the non-private portions of your spreadsheet and your chat messages to the API of an AI provider you select, using an API key you supply. It reads and writes data in your open Excel workbook in response to AI-generated instructions that you review and accept.
 
+The Add-in is available to individual users on a self-service basis. There is no ABDK account or sign-in, and no enterprise agreement or administrator provisioning is required — you need only your own account with one of the AI providers listed in section 3.1, each of which registers new individual users directly.
+
 ---
 
 ## 3. Third-Party Services

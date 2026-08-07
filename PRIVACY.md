@@ -20,7 +20,7 @@ ABDK Confy AI is a Microsoft Excel task-pane add-in that lets you analyze and mo
 ### 2.1 AI Provider API Key
 
 - On first launch you choose an AI provider and supply your own API key for it. Supported providers are OpenAI, Anthropic, Google Gemini, OpenRouter, and any OpenAI-compatible endpoint whose address you supply yourself.
-- The key is stored **locally on your device** — in Excel's per-document secure storage (`OfficeRuntime.storage`) when used as an Excel add-in.
+- The key is stored **locally on your device** — in Excel's per-add-in secure storage (`OfficeRuntime.storage`).
 - The key is never sent to ABDK Consulting or to any server other than the API endpoint of the provider you selected:
 
 | Provider | Endpoint |

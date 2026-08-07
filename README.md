@@ -37,6 +37,8 @@ Each provider offers a list of suggested models, and you can always type in a mo
 
 > **Note:** Using this add-in requires an account with one of the providers above and an active API key. See the cost section below for estimates.
 
+**Anyone can use this add-in as an individual.** Every provider above offers self-service sign-up, and the add-in's setup screen links straight to the page where a new user registers and creates a key. There is no ABDK account or sign-in, and no enterprise agreement, administrator provisioning, or organisational licence is required.
+
 ---
 
 ## API Cost Estimates
