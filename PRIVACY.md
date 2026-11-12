@@ -1,6 +1,6 @@
-# Privacy Policy — ABDK Confy AI
+# Privacy Policy: ABDK Confy AI
 
-**Effective date:** 2026-08-03
+**Effective date:** 2026-11-12
 **Publisher:** ABDK Consulting, Estonia
 **Contact:** [dmitry@abdkconsulting.com](mailto:dmitry@abdkconsulting.com)
 **Add-in hosted at:** https://confyai.abdk.consulting
@@ -11,17 +11,23 @@
 
 ABDK Confy AI is a Microsoft Excel task-pane add-in that lets you analyze and modify spreadsheets using an AI assistant while keeping designated columns private. This policy explains what data is processed when you use the add-in, where it goes, and what rights you have.
 
-**The short version:** ABDK Consulting collects no personal data. Your spreadsheet data is sent only to the AI provider you choose (and only the columns you did not mark as private). Your API key is stored on your device only and is never transmitted to ABDK.
+**The short version:**
+
+- Your spreadsheet data and chat messages go from your device to the AI service, never through ABDK servers. The values of columns you mark as private are not sent, only their headers and data types.
+- You can connect the add-in in two ways:
+  - **Your own API key.** The key is stored on your device only and is never sent to ABDK.
+  - **The free trial.** ABDK gives the add-in a key for its own OpenRouter account. Requests go through OpenRouter to Microsoft Azure, with zero data retention at Azure. To prevent abuse, ABDK records the IP address and request headers of each request for a free key. ABDK can see how much each free key is used, but not what was sent with it.
+- ABDK keeps a limited access log of its web server (section 4.1).
 
 ---
 
-## 2. Data Processed by the Add-in
+## 2. Data Processed on Your Device
 
-### 2.1 AI Provider API Key
+### 2.1 Connection Settings and API Key
 
-- On first launch you choose an AI provider and supply your own API key for it. Supported providers are OpenAI, Anthropic, Google Gemini, OpenRouter, and any OpenAI-compatible endpoint whose address you supply yourself.
-- The key is stored **locally on your device** — in Excel's per-add-in secure storage (`OfficeRuntime.storage`).
-- The key is never sent to ABDK Consulting or to any server other than the API endpoint of the provider you selected:
+- On first launch you choose how to connect: the free trial (section 3), or an AI provider of your choice with your own API key. Supported providers are OpenAI, Anthropic, Google Gemini, OpenRouter, and any OpenAI-compatible endpoint whose address you supply yourself.
+- The key, your own or the free trial key, is stored **locally on your device**, in Excel's per-add-in storage (`OfficeRuntime.storage`).
+- Your own key is never sent to ABDK Consulting or to any server other than the API endpoint of the provider you selected:
 
 | Provider | Endpoint |
 |---|---|
@@ -34,88 +40,173 @@ ABDK Confy AI is a Microsoft Excel task-pane add-in that lets you analyze and mo
 ### 2.2 Spreadsheet Data
 
 - When you send a message to the AI, the add-in reads the currently open workbook and constructs a request.
-- **Private columns** — columns you explicitly marked as sensitive — are **excluded entirely** from every request. Their values are never read by the AI and never leave your device in connection with the AI chat.
-- **Non-private columns** (headers and cell values) are included in requests sent to your chosen provider's API so the AI can answer your questions and suggest edits.
+- **Private columns** (columns you explicitly marked as sensitive): their **values are excluded** from every request. They are never read by the AI and never leave your device in connection with the AI chat. Their **headers and data types** (number, date, true/false, or text) **are sent**, so do not put sensitive information in a column header.
+- **Non-private columns** (headers and cell values) are included in requests sent to the AI service so the AI can answer your questions and suggest edits.
 - No spreadsheet data is sent to ABDK Consulting or stored on any ABDK server.
 
 ### 2.3 Chat Messages
 
-- The text of your chat messages is sent to your chosen provider's API as part of each request.
-- Chat history is retained in the add-in's session memory for conversation context and is discarded when you close or reset the chat. It is not persisted to any server.
+- The text of your chat messages is sent to the AI service as part of each request.
+- Chat history is retained in the add-in's session memory for conversation context and is discarded when you close or reset the chat. It is not saved to any ABDK server.
 
 ### 2.4 Secure Column Configuration
 
-- Your selection of private columns is saved inside the Excel workbook's document settings (a standard Office storage mechanism). This data stays with the file on your device; it is not transmitted to ABDK.
+- Your selection of private columns is saved inside the Excel workbook's document settings (a standard Office storage mechanism). This data stays with the file; it is not transmitted to ABDK.
 
 ---
 
-## 3. Data Sent to Your AI Provider
+## 3. The Free Trial
 
-When you use the AI chat, the add-in makes API calls directly from your browser to the servers of the provider you selected. The data included in those calls is:
+The free trial lets you use the add-in without your own AI provider account. ABDK Consulting pays for a limited daily amount of AI use.
 
-| Data | Included? |
-|------|-----------|
-| Values from private columns | **Never** |
-| Values from non-private columns | Yes |
-| Column headers (non-private) | Yes |
-| Chat message text | Yes |
-| Your name, email, or Microsoft account details | No |
-| Your API key (as an authorization header) | Yes (required by the provider) |
+### 3.1 Getting a Free Key
 
-These requests are governed by the privacy policy and terms of the provider you chose — for example [OpenAI](https://openai.com/policies/privacy-policy), [Anthropic](https://www.anthropic.com/legal/privacy), [Google](https://policies.google.com/privacy), or [OpenRouter](https://openrouter.ai/privacy). ABDK Consulting is not responsible for any provider's data handling practices. You are using that provider's API under your own account and are subject to their terms.
+When you choose the free trial, the add-in asks the ABDK server (`confyai.abdk.consulting`) for a key. The server creates a new key on ABDK's OpenRouter account and sends it to the add-in, which stores it on your device (section 2.1). If your network already received a key in the last 24 hours, the server first asks you to solve a CAPTCHA. The CAPTCHA is generated by the ABDK server itself; no third-party CAPTCHA service is used.
 
-Note that providers differ in how they handle the data they receive, including whether prompts may be retained or used for model training. Where this matters to you, check the terms of the specific provider and account tier you use. If you route requests through OpenRouter or an OpenAI-compatible endpoint of your own choosing, your data reaches whichever upstream service that operator forwards it to.
+For each request for a key, ABDK stores:
+
+- the time;
+- your IP address;
+- your browser's user agent and the other request headers (cookies and authorization headers are not stored);
+- whether a CAPTCHA was solved, and the outcome of the request;
+- for a key that was created: its identifier on OpenRouter (not the key itself) and its daily limit.
+
+The key's name on OpenRouter is linked to this record, so ABDK can tell which request a key came from.
+
+**Purpose:** to prevent one person from collecting many free keys, and to find and disable keys that are abused.
+
+### 3.2 Where Your Data Goes in the Free Trial
+
+- Requests go **directly from your device to OpenRouter** (`openrouter.ai`), which forwards them to **Microsoft Azure**, where the AI model runs. They do not pass through ABDK servers.
+- The free trial key can only be used with endpoints that OpenRouter lists as **zero data retention**: Azure does not store your prompts or the AI's replies after it answers.
+- On ABDK's OpenRouter account, prompt logging is turned off, and so is the option that lets OpenRouter use prompts to improve its product. OpenRouter does not store your prompts or replies under ABDK's account. Under its own [privacy policy](https://openrouter.ai/privacy), OpenRouter still keeps metadata about each request (such as time, model, and token counts), may classify a sample of prompts by topic without linking them to an account, and keeps content flagged as possible child sexual abuse material.
+- Because the key belongs to ABDK's account, your requests reach OpenRouter and Azure as ABDK's requests, not under an account of your own.
+- When you open the settings menu, the add-in asks OpenRouter how much of today's limit the key has used. This request also goes directly to OpenRouter.
+
+### 3.3 What ABDK Can See About Free Key Usage
+
+OpenRouter records the usage of each key and shows it to ABDK, as the account owner: when the key was last used, which model was used, the number of tokens, and the cost. ABDK uses this to see whether the free trial helps people start using the add-in and to find abuse.
+
+ABDK **cannot** see the content of your requests: your questions, your spreadsheet data, or the AI's replies.
+
+Usage is recorded per key, not per person, but since each key is linked to the request that created it (section 3.1), it can be linked to an IP address.
 
 ---
 
 ## 4. Data Collected by ABDK Consulting
 
-**ABDK Consulting collects no personal data from users of this add-in.**
+### 4.1 Web Server Access Log
 
-- The add-in is a static web application hosted at `confyai.abdk.consulting`. Standard web-server access logs (IP address, timestamp, URL path, user-agent) may be retained for up to 30 days for security and operational purposes. These logs are not linked to your identity or used for any other purpose.
-- ABDK does not use cookies, tracking pixels, analytics services, or any third-party telemetry in the add-in.
-- ABDK does not receive your spreadsheet data, your chat messages, or your API key.
+The add-in is a web application hosted at `confyai.abdk.consulting`. When the add-in is opened or used, the server records some of the requests for its files: the time, IP address, path, response status, user agent, referer, preferred language, and similar browser-supplied request details. ABDK uses this log to count how many people open and use the add-in and to keep the service secure. It is not linked to your name, email, or Microsoft account.
+
+### 4.2 Free Trial Records
+
+See section 3.1 for the key request records, and section 3.3 for key usage.
+
+### 4.3 What ABDK Does Not Collect
+
+- ABDK does not use cookies, tracking pixels, analytics services, or third-party telemetry in the add-in.
+- ABDK does not receive your spreadsheet data, your chat messages, or your own API key.
+- ABDK does not receive your name, email, or Microsoft account details.
+
+### 4.4 Legal Basis
+
+ABDK processes the data in sections 3 and 4 on the basis of its legitimate interests (Article 6(1)(f) GDPR): running and securing the service, understanding how it is used, and preventing abuse of the free trial.
 
 ---
 
-## 5. Data Sharing
+## 5. Data Retention
 
-ABDK Consulting does not sell, rent, or share personal data with third parties. The only external party that receives data when you use the add-in is **the AI provider you selected**, and that data is sent directly from your browser — not via ABDK.
+| Data | Kept for |
+|---|---|
+| Web server access log | 1 year |
+| Free key request records (IP address, headers) | 1 year |
+| CAPTCHA challenges | 1 day |
+| Free key identifiers and limits | Until the free trial ends |
+| Free key usage (on OpenRouter) | Under OpenRouter's retention policy |
 
----
+To remove data stored on your device:
 
-## 6. Data Retention and Deletion
-
-Since ABDK Consulting does not collect or store personal data, there is nothing to delete on our side. To remove data stored on your device:
-
-- **API key:** Use **Sign out (remove API key)** in the add-in's settings panel, or clear `OfficeRuntime.storage` / `localStorage` manually.
+- **API key or free trial key:** Use **Sign out (remove API key)** or **Stop using the free trial** in the add-in's settings panel, or clear `OfficeRuntime.storage` / `localStorage` manually.
 - **Secure column configuration:** Delete the relevant document settings from within Excel, or remove the add-in and re-install it.
 
-For data held by your AI provider (such as conversation history retained under your account with them), consult that provider's own data deletion procedures — for example [platform.openai.com/account](https://platform.openai.com/account) for OpenAI.
+---
+
+## 6. Data Sharing and Service Providers
+
+ABDK Consulting does not sell or rent personal data. Data reaches the following parties:
+
+| Party | Role | Data |
+|---|---|---|
+| The AI provider you selected (own key) | Provides the AI model, under your own account | Requests you send, as described in section 7 |
+| OpenRouter (free trial) | Routes requests to the AI model, under ABDK's account | Requests you send and their metadata (section 3.2) |
+| Microsoft Azure (free trial) | Runs the AI model, with zero data retention | Requests you send |
+| DigitalOcean | Hosts the ABDK server and its database | Access log and free trial records (sections 3.1 and 4.1) |
+
+Some of these services are located in the United States or other countries outside the European Economic Area. Where data leaves the EEA, it is protected under the providers' own transfer mechanisms, such as the EU-US Data Privacy Framework or Standard Contractual Clauses.
+
+ABDK may disclose data where required by law.
 
 ---
 
-## 7. Children's Privacy
+## 7. Data Sent to the AI Service
+
+The add-in makes API calls directly from your browser to the AI service: the provider you selected, or OpenRouter in the free trial. The data included in those calls is:
+
+| Data | Included? |
+|------|-----------|
+| Values from private columns | **Never** |
+| Values from non-private columns | Yes |
+| Column headers, including headers of private columns | Yes |
+| Data types of private columns (number, date, true/false, or text) | Yes |
+| Chat message text | Yes |
+| Your name, email, or Microsoft account details | No |
+| The API key (as an authorization header) | Yes (required by the provider) |
+
+When you use your own key, these requests are governed by the privacy policy and terms of the provider you chose, for example [OpenAI](https://openai.com/policies/privacy-policy), [Anthropic](https://www.anthropic.com/legal/privacy), [Google](https://policies.google.com/privacy), or [OpenRouter](https://openrouter.ai/privacy). ABDK Consulting is not responsible for any provider's data handling practices. You are using that provider's API under your own account and are subject to their terms.
+
+Note that providers differ in how they handle the data they receive, including whether prompts may be retained or used for model training. Where this matters to you, check the terms of the specific provider and account tier you use. If you route requests through OpenRouter or an OpenAI-compatible endpoint of your own choosing, your data reaches whichever upstream service that operator forwards it to.
+
+For data held by your AI provider (such as conversation history retained under your account with them), consult that provider's own data deletion procedures, for example [platform.openai.com/account](https://platform.openai.com/account) for OpenAI.
+
+---
+
+## 8. Your Rights
+
+Under the GDPR and similar laws, you have the right to:
+
+- ask what personal data ABDK holds about you, and get a copy;
+- ask ABDK to correct or delete it;
+- object to its processing or ask to restrict it.
+
+To use these rights, email [dmitry@abdkconsulting.com](mailto:dmitry@abdkconsulting.com). Since ABDK holds no names or accounts, include the IP address you used and the approximate dates, so the records can be found.
+
+You also have the right to complain to a data protection authority. In Estonia, this is the [Data Protection Inspectorate (Andmekaitse Inspektsioon)](https://www.aki.ee/en).
+
+---
+
+## 9. Children's Privacy
 
 This add-in is intended for business and professional use. It is not directed at children under the age of 13 (or the applicable minimum age in your jurisdiction). ABDK Consulting does not knowingly collect data from children.
 
 ---
 
-## 8. Security
+## 10. Security
 
 - All communication between the add-in and external services uses HTTPS (TLS 1.2 or higher).
-- Your API key is stored using the platform-provided secure storage mechanism (`OfficeRuntime.storage`), which is isolated per add-in and not accessible by other add-ins or web pages.
-- Private column data never leaves your device in connection with AI requests.
+- Your API key or free trial key is stored using the platform-provided storage mechanism (`OfficeRuntime.storage`), which is isolated per add-in and not accessible by other add-ins or web pages.
+- The ABDK server does not store free trial keys, only their identifiers on OpenRouter.
+- Private column values never leave your device in connection with AI requests.
 
 ---
 
-## 9. Changes to This Policy
+## 11. Changes to This Policy
 
 If this policy changes materially, the updated version will be published at this URL with a revised effective date. Continued use of the add-in after a change constitutes acceptance of the updated policy.
 
 ---
 
-## 10. Contact
+## 12. Contact
 
 For privacy-related questions or concerns, contact:
 
